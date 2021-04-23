@@ -1,4 +1,9 @@
 .profile__edit-bitton {
     width: 24px;
     margin: 0;
+    align-self: flex-end;
+}
+
+.profile__edit-bitton:hover {
+    opacity: 0.6;
 }

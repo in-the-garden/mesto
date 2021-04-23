@@ -1,0 +1,4 @@
+.profile__personal-info {
+    display: flex;
+    flex-direction: row;
+}

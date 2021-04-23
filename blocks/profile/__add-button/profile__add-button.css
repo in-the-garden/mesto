@@ -1,0 +1,9 @@
+.profile__add-button {
+    margin: 0;
+    width: 150px;
+    align-self: center;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
+}
