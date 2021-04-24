@@ -1,0 +1,10 @@
+.element__heart-button_active {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: #FFFFFF;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../../images/black-heart-button.png);
+}

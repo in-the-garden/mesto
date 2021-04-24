@@ -5,3 +5,15 @@
     border-color: #545454;
     margin: 41px 0 0;
 }
+
+@media (max-width:770px) {
+    .header__line {
+        margin: 36px 0 0;
+    }
+}
+
+@media (max-width:450px) {
+    .header__line {
+        margin: 31.6px 0 0;
+    }
+}

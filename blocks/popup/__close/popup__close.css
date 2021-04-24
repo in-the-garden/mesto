@@ -1,0 +1,32 @@
+.popup__close {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    border: none;
+    position: absolute;
+    bottom: 330px;
+    left: 433px;
+    transform: opacity 1s ease-in ;
+}
+
+.popup__close:hover {
+    opacity: .6;
+}
+
+@media (max-width: 650px) {
+    .popup__close {
+        width: 26px;
+        height: 26px;
+        bottom: 322px;
+        left: 285px;
+    }
+}
+
+@media (max-width: 400px) {
+    .popup__close {
+        bottom: 340px;
+        left: 245.62px;
+    }
+}

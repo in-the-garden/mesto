@@ -1,0 +1,18 @@
+.popup__save {
+    border: none;
+    outline: none;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    text-align: center;
+    background-color: inherit;
+    align-self: center;
+}
+
+@media (max-width:650px) {
+    .popup__save {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}   

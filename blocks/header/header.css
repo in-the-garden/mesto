@@ -5,3 +5,27 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+@media (max-width:1100px) {
+    .header {
+        padding: 45px 150px 0;
+    }
+}
+
+@media (max-width: 970px) {
+    .header {
+        padding: 40px 100px 0;
+    }
+}
+
+@media (max-width: 870px) {
+    .header {
+        padding: 35px 50px 0;
+    }
+}
+
+@media (max-width:450px) {
+    .header {
+        padding: 25px 0 0;
+    }
+}
