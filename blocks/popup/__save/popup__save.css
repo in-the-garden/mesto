@@ -3,7 +3,7 @@
     min-height: 50px;
     background-color: #000000;
     padding: 0;
-    margin: 48px 36px 0;
+    margin: 48px 36px 37px;
     border-radius: 2px;
     transform: opacity 1s ease-in;
     border: none;
@@ -25,6 +25,6 @@
         font-size: 14px;
         line-height: 17px;
         min-height: 46px;
-        margin: 45px 22px 0;
+        margin: 45px 22px 25px;
     }
 }   
