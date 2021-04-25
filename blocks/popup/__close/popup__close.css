@@ -6,7 +6,7 @@
     outline: none;
     border: none;
     position: absolute;
-    bottom: 330px;
+    bottom: 345px;
     left: 433px;
     transform: opacity 1s ease-in ;
 }
@@ -20,14 +20,14 @@
     .popup__close {
         width: 26px;
         height: 26px;
-        bottom: 322px;
+        bottom: 330px;
         left: 285px;
     }
 }
 
 @media (max-width: 400px) {
     .popup__close {
-        bottom: 340px;
+        bottom: 350px;
         left: 245.62px;
     }
 }
