@@ -8,17 +8,16 @@
     outline: none;
     background-color: #000000;
     background-image: url(../../../images/add-button.svg);
-    transform: opacity 1s ease-in;
 }
 
 .profile__add-button:hover {
     opacity: .6;
+    cursor: pointer;
 }
 
 @media (max-width: 770px) {
     .profile__add-button {
         width: 282px;
-        height: 50px;
         margin: 36px 0 0;
         background-image: url(../../../images/add-button1.svg);
     }
