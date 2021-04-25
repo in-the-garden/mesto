@@ -6,10 +6,11 @@
     background-color: #FFFFFF;
     width: 22px;
     height: 19px;
-    background-image: url(../../../images/heart-button.png);
+    background-image: url(../../../images/heart-button.svg);
 }
 
 .element__heart-button:hover {
     opacity: 0.5;
+    cursor: pointer;
 }
 

@@ -17,6 +17,7 @@
 
 .popup__save:hover {
     opacity: .8;
+    cursor: pointer;
 }
 
 @media (max-width:650px) {

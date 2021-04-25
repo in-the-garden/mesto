@@ -1,8 +1,5 @@
 .header__line {
-    border-top: 1px;
-    border-right: 1px;
-    border-left: 1px;
-    border-color: #545454;
+    border-bottom: 1px solid rgba(54, 54, 54, .7);
     margin: 41px 0 0;
 }
 
