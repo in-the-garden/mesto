@@ -16,14 +16,12 @@ function togglePopup(event) {
 */
 
 function openPopup(event) {
-    event.preventDefault(); 
     popup.classList.add('popup_is-opened');
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; 
 }
 
 function closePopup(event) {
-    event.preventDefault(); 
     popup.classList.remove('popup_is-opened');
 }
 

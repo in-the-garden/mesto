@@ -2,32 +2,56 @@
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-style: normal;
     margin: 0;
-    padding: 45px 200px 0;
+    padding: 45px 200px 41px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
+.header::after {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid rgba(84, 84, 84, .7); 
+    margin: 0 200px 0;
+}
+    
 @media (max-width:1100px) {
     .header {
-        padding: 45px 150px 0;
+        padding: 45px 150px 41px;
+    }
+    .header::after {
+        margin: 0 150px 0;
     }
 }
 
 @media (max-width: 970px) {
     .header {
-        padding: 40px 100px 0;
+        padding: 40px 100px 38px;
+    }
+    .header::after {
+        margin: 0 100px 0;
     }
 }
 
 @media (max-width: 870px) {
     .header {
-        padding: 35px 50px 0;
+        padding: 35px 50px 36px;
+    }
+    .header::after {
+        margin: 0 50px 0;
     }
 }
 
 @media (max-width:450px) {
     .header {
-        padding: 25px 0 0;
+        padding: 25px 0 31.6px;
+    }
+    .header::after {
+        margin: 0;
     }
 }
