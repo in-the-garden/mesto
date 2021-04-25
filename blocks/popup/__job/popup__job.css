@@ -1,4 +1,5 @@
 .popup__job {
+    width: 358px;
     margin: 30px 36px 0;
     padding: 0 0 12px;
     outline: none;
@@ -12,6 +13,7 @@
 
 @media (max-width:650px) {
     .popup__job {
+        width: 238px;
         margin: 30px 22px 0;
     }
 }   

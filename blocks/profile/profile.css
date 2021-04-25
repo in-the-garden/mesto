@@ -1,4 +1,6 @@
 .profile {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
     margin: 0;
     padding: 39px 200px 0 201px;
     display: flex;

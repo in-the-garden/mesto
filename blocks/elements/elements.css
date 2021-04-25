@@ -1,4 +1,6 @@
 .elements {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
     padding: 51px 200px 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
