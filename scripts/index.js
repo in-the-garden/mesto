@@ -7,11 +7,11 @@ function togglePopup(event) {
 */
 const popupEdit = document.querySelector('.popup__profile');
 const openEditFrom = document.querySelector('.profile__edit-button ');
-const closeEditForm = document.querySelector('.popup__close-btn_profile');
+const closeEditForm = document.querySelector('.popup__close_btn_profile');
 
 const popupAdd = document.querySelector('.popup__place');
 const openAddForm = document.querySelector('.profile__add-button');
-const closeAddForm = document.querySelector('.popup__close-btn_place');
+const closeAddForm = document.querySelector('.popup__close_btn_place');
 
 let nameInput = popupEdit.querySelector('.popup__input_info_name');
 let jobInput = popupEdit.querySelector('.popup__input_info_job');
@@ -20,7 +20,6 @@ let profileJob = document.querySelector('.profile__subtitle');
 
 let titleInput = popupAdd.querySelector('.popup__input_place_title');
 let linkInput = popupAdd.querySelector('.popup__input_place_link');
-let elementTitle = document.q
 
 function openPopup(popupForm) {
     if (popupForm === popupEdit) {
@@ -36,7 +35,7 @@ function closePopup(popupForm) {
     popupForm.classList.remove('popup_is-opened');
 }
 
-let formElement = popupEdit.querySelector('.popup__form')
+let formProfile = popupEdit.querySelector('.popup__form_submit_profile')
 
 function formSubmitHandler (event) {
     event.preventDefault();    
@@ -51,7 +50,7 @@ openEditFrom.addEventListener('click', function() {
 closeEditForm.addEventListener('click', function() {
     closePopup(popupEdit);
 });
-formElement.addEventListener('submit', formSubmitHandler); 
+formProfile.addEventListener('submit', formSubmitHandler); 
 
 openAddForm.addEventListener('click', function() {
     openPopup(popupAdd);
@@ -59,7 +58,18 @@ openAddForm.addEventListener('click', function() {
 closeAddForm.addEventListener('click', function() {
     closePopup(popupAdd);
 });
+ let formPlaces = popupAdd.querySelector('.popup__form_submit_place')
+ 
+ function formAddNewCard (event) {
+    event.preventDefault();    
+    const cardName = titleInput.value;
+    const cardLink = linkInput.value;
+    cardsContainer.append(createNewCard(cardName, cardLink));
+    popupAdd.classList.remove('popup_is-opened');
+};
 
+
+formPlaces.addEventListener('submit', formAddNewCard); 
 ///// Template-часть
 
 const cardsContainer = document.querySelector('.elements');
@@ -104,18 +114,4 @@ initialCards.forEach((item) => {
     const newCard = createNewCard(item.name, item.link);
     cardsContainer.append(newCard);
 });
-/*
-button.addEventListener('click', function() {
-    const taskValue = input.value;
 
-    tasksContainer.append(createTodo(taskValue));
-    recalculateCount();
-});
-
-
-function formSubmitHandler (event) {
-    event.preventDefault();    
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    popupEdit.classList.remove('popup_is-opened');
-}*/
