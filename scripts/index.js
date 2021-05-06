@@ -30,6 +30,8 @@ function openPopup(popupForm) {
         jobInput.value = profileJob.textContent; 
     } else {
         popupForm.classList.add('popup_is-opened');
+        titleInput.value = "";
+        linkInput.value = "";
     }
 }
 
