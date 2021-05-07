@@ -1,5 +1,13 @@
 .popup__form {
-    width: inherit;
-    height: inherit;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
+@media (max-width: 650px) {
+    .popup__form {
+        min-width: 282px;
+    }
+}
