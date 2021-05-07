@@ -57,7 +57,7 @@ function formAddNewCard (evt) {
     evt.preventDefault();    
     const cardName = titleInput.value;
     const cardLink = linkInput.value;
-    cardsContainer.append(createNewCard(cardName, cardLink));
+    cardsContainer.prepend(createNewCard(cardName, cardLink));
     popupAdd.classList.remove('popup_is-opened');
 };
 
@@ -121,7 +121,7 @@ const initialCards = [
   let imageTitle = popupImage.querySelector('.popup__title-image');
   
  
-function openPopuImage(cardName, cardLink) {
+function openPopupImage(cardName, cardLink) {
     popupImage.classList.add('popup_is-opened');
     fullImage.src = cardLink;
     fullImage.alt = cardName;
@@ -148,7 +148,7 @@ function createNewCard(cardName, cardLink) {
     cardRemoveButton.addEventListener('click', handleRemoveCard);
 
     newCard.querySelector('.element__image').addEventListener('click', function() {
-        openPopuImage(cardName, cardLink);
+        openPopupImage(cardName, cardLink);
        });
 
    return newCard;
