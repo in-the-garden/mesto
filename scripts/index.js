@@ -5,15 +5,15 @@ function togglePopup(event) {
     jobInput.value = profileJob.textContent; 
 }
 */
-const popupEdit = document.querySelector('.popup__profile');
+const popupEdit = document.querySelector('.popup_form_profile');
 const openEditFrom = document.querySelector('.profile__edit-button ');
 const closeEditForm = document.querySelector('.popup__close_btn_profile');
 
-const popupAdd = document.querySelector('.popup__place');
+const popupAdd = document.querySelector('.popup_form_place');
 const openAddForm = document.querySelector('.profile__add-button');
 const closeAddForm = document.querySelector('.popup__close_btn_place');
 
-const popupImage = document.querySelector('.popup__images');
+const popupImage = document.querySelector('.popup_form_images');
 const closeImage = document.querySelector('.popup__close_btn_image');
 
 let nameInput = popupEdit.querySelector('.popup__input_info_name');
