@@ -48,18 +48,18 @@
         <form class="popup__form popup__form_submit_place" name="new-place">
             <button class="popup__close popup__close_btn_place" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input class="popup__input popup__input_place_title" type="text" name="name" placeholder="Название">
-            <input class="popup__input popup__input_place_link" type="text" name="link" placeholder="Ссылка на картинку">
+            <input class="popup__input popup__input_place_title" type="text" name="name" placeholder="Название" required>
+            <input class="popup__input popup__input_place_link" type="text" name="link" placeholder="Ссылка на картинку" required>
             <button class="popup__save popup__save_btn_place" type="submit">Сохранить</button>
         </form>
     </div>
 
     <div class="popup popup_form_images">
-        <form class="popup__form popup__form_submit_image" name="new-place">
+        <form class="popup__form popup__form_submit_image" name="new-place"> <!--убрать-->
             <button class="popup__close popup__close_btn_image" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
             <img class="popup__image" src="#" alt="#">
             <p class="popup__title-image"></p>
-        </form>
+        </form> <!--убрать-->
     </div>
 
     <template id="card-template" class="card-template">
