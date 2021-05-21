@@ -6,7 +6,9 @@
     align-self: center;
     border: none;
     outline: none;
+    background-image: url(../../../images/edit-button.svg);
     background-color: #000000;
+    background-size: contain;
     transform: opacity 1s ease-in;
     text-overflow: ellipsis;
     white-space: nowrap;

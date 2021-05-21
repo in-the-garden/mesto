@@ -18,7 +18,7 @@
                     <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button type="button" class="profile__edit-button"><img class="profile__edit-button-image" src="./images/edit-button.svg" alt="Кнопка редактировать профиль"></button>
+                        <button type="button" class="profile__edit-button"></button>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                 </div>
@@ -35,21 +35,25 @@
     </div>  
 
     <div class="popup popup_form_profile">
-        <form class="popup__form popup__form_submit_profile" name="profile-info">
+        <form class="popup__form popup__form_submit_profile" name="profile-info" novalidate>
             <button class="popup__close popup__close_btn_profile" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__input popup__input_info_name" type="text" name="name">
-            <input class="popup__input popup__input_info_job" type="text" name="job">
+            <input id="info-name" class="popup__input popup__input_info_name" type="text" name="name" minlength="2" maxlength="40" required>
+            <span class="popup__input-error info-name-error"></span>
+            <input id="info-job" class="popup__input popup__input_info_job" type="text" name="job" minlength="2" maxlength="200" required>
+            <span class="popup__input-error info-job-error"></span>
             <button class="popup__save" type="submit">Сохранить</button>
         </form>
     </div> 
 
     <div class="popup popup_form_place">
-        <form class="popup__form popup__form_submit_place" name="new-place">
+        <form class="popup__form popup__form_submit_place" name="new-place" novalidate> 
             <button class="popup__close popup__close_btn_place" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input class="popup__input popup__input_place_title" type="text" name="name" placeholder="Название" required>
-            <input class="popup__input popup__input_place_link" type="text" name="link" placeholder="Ссылка на картинку" required>
+            <input id="place-title" class="popup__input popup__input_place_title" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="popup__input-error place-title-error"></span>
+            <input id="place-link" class="popup__input popup__input_place_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error place-link-error"></span>
             <button class="popup__save popup__save_btn_place" type="submit">Сохранить</button>
         </form>
     </div>
@@ -73,6 +77,7 @@
         </article>
     </template>
 
+    <script src="./scripts/validate.js" defer></script>
     <script src="./scripts/index.js" defer></script>
 </body>
 </html>
