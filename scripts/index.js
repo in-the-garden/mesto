@@ -160,7 +160,7 @@ openEditFrom.addEventListener('click', function() {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; 
-    clearErrorElement(popupEdit);
+    clearErrorElement(popupEdit, config);
 });
 
 closeEditForm.addEventListener('click', function() {
@@ -174,7 +174,7 @@ openAddForm.addEventListener('click', function() {
     openPopup(popupAdd);
     titleInput.value = "";
     linkInput.value = "";
-    clearErrorElement(popupAdd);
+    clearErrorElement(popupAdd, config);
 });
 
 closeAddForm.addEventListener('click', function() {
@@ -188,8 +188,16 @@ closeImage.addEventListener('click', function() {
     closePopup(popupImage);
 });
 
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    SubmitButtonSelector: '.popup__save',
+    ButtonInactiveClass: 'popup__save_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorActiveClass: 'popup__input-error_active'
+}
 
-enableValidation();
+enableValidation(config);
 
 
 
