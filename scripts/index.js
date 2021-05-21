@@ -1,11 +1,3 @@
-/*
-function togglePopup(event) {
-    popup.classList.toggle('popup_is-opened');
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent; 
-}
-*/
-
 /// Объявление переменных для редактирования профиля ///
 const popupEdit = document.querySelector('.popup_form_profile');
 const formProfile = popupEdit.querySelector('.popup__form_submit_profile')
@@ -15,7 +7,7 @@ const jobInput = popupEdit.querySelector('.popup__input_info_job');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle'); 
 
-const openEditFrom = document.querySelector('.profile__edit-button ');
+const openEditFrom = document.querySelector('.profile__edit-button');
 const closeEditForm = document.querySelector('.popup__close_btn_profile');
 
 
@@ -79,6 +71,23 @@ function closePopup(popupForm) {
     popupForm.classList.remove('popup_is-opened');
 };
 
+function closePopupEsc(evt) {
+    if (evt.key === 'Escape') {
+        const popuplist = Array.from(document.querySelectorAll('.popup'));
+        popuplist.forEach((popupElement) => {
+            closePopup(popupElement);
+        });
+    };
+}
+
+function closePopupOverlay(evt) {
+    if (evt.target.classList.contains('popup')) {
+        const popuplist = Array.from(document.querySelectorAll('.popup'));
+        popuplist.forEach((popupElement) => {
+            closePopup(popupElement);
+        });
+    };
+};
 
 /// Обработчики отправки формы ///
 function formSubmitHandlerForEdit (evt) {
@@ -142,11 +151,16 @@ initialCards.forEach((item) => {
 
 
 /// Слушатели событий ///
+document.addEventListener('keydown', closePopupEsc);
+
+document.addEventListener('click', closePopupOverlay);
+
 // окно редактирования //
 openEditFrom.addEventListener('click', function() {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; 
+    clearErrorElement(popupEdit, config);
 });
 
 closeEditForm.addEventListener('click', function() {
@@ -160,6 +174,7 @@ openAddForm.addEventListener('click', function() {
     openPopup(popupAdd);
     titleInput.value = "";
     linkInput.value = "";
+    clearErrorElement(popupAdd, config);
 });
 
 closeAddForm.addEventListener('click', function() {
@@ -172,3 +187,18 @@ formPlaces.addEventListener('submit', formSubmitHandlerForAdd);
 closeImage.addEventListener('click', function() {
     closePopup(popupImage);
 });
+
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    SubmitButtonSelector: '.popup__save',
+    ButtonInactiveClass: 'popup__save_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorActiveClass: 'popup__input-error_active'
+}
+
+enableValidation(config);
+
+
+
+

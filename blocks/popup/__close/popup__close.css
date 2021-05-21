@@ -6,8 +6,8 @@
     outline: none;
     border: none;
     position: absolute;
-    bottom: 345px;
-    left: 433px;
+    bottom: calc(100% + 4px);
+    left: calc(100% + 4px);
     transform: opacity 1s ease-in;
 }
 
@@ -20,14 +20,13 @@
     .popup__close {
         width: 26px;
         height: 26px;
-        bottom: 330px;
-        left: 285px;
+        
     }
 }
 
 @media (max-width: 400px) {
     .popup__close {
-        bottom: 350px;
-        left: 245.62px;
+        bottom: 107.33%;
+        left: 84.68%;
     }
 }

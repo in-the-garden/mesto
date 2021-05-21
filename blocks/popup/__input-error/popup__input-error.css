@@ -1,0 +1,14 @@
+.popup__input-error {
+    margin: 5px 36px 0;
+    display: none;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+}
+
+@media (max-width:650px) {
+    .popup__input-error {
+        margin: 5px 22px 0;
+    }
+
+}   
