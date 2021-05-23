@@ -1,14 +1,24 @@
 .popup__input-error {
-    margin: 5px 36px 0;
+    /*margin: 5px 36px 0;*/
     display: none;
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
+    position: absolute;
+    top: 62%;
+    left: 36px;
+}
+
+.popup__input-error:first-of-type {
+    top: 44.4%;
 }
 
 @media (max-width:650px) {
     .popup__input-error {
-        margin: 5px 22px 0;
+        top: 65%;
+        left: 22px;
     }
-
+    .popup__input-error:first-of-type {
+        top: 46.8%;
+    }
 }   
