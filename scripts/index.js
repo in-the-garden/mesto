@@ -1,4 +1,4 @@
-/// Объявление переменных для редактирования профиля ///
+/// Объявление переменных для окна редактирования профиля ///
 const popupEdit = document.querySelector('.popup_form_profile');
 const formProfile = popupEdit.querySelector('.popup__form_submit_profile')
 const nameInput = popupEdit.querySelector('.popup__input_info_name');
@@ -11,7 +11,7 @@ const openEditFrom = document.querySelector('.profile__edit-button');
 const closeEditForm = document.querySelector('.popup__close_btn_profile');
 
 
-/// Объявление переменных для добавления новой карточки ///
+/// Объявление переменных для окна добавления новой карточки ///
 const popupAdd = document.querySelector('.popup_form_place');
 const formPlaces = popupAdd.querySelector('.popup__form_submit_place');
 const titleInput = popupAdd.querySelector('.popup__input_place_title');
@@ -180,7 +180,7 @@ openEditFrom.addEventListener('click', function() {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; 
-    clearErrorElement(popupEdit, config);
+    profileFormValidator.clearErrorElement();
 });
 
 closeEditForm.addEventListener('click', function() {
@@ -195,7 +195,7 @@ openAddForm.addEventListener('click', function() {
     formPlaces.reset();
     ///titleInput.value = "";
     ///linkInput.value = "";
-    clearErrorElement(popupAdd, config);
+    placesFormValidator.clearErrorElement();
 });
 
 closeAddForm.addEventListener('click', function() {
@@ -204,18 +204,31 @@ closeAddForm.addEventListener('click', function() {
 
 formPlaces.addEventListener('submit', handleSubmitAddForm); 
 
-// данные для валидации форм //
-const config = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    SubmitButtonSelector: '.popup__save',
-    ButtonInactiveClass: 'popup__save_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorActiveClass: 'popup__input-error_active'
-}
 
-enableValidation(config);
+const profileFormValidator = new FormValidation(
+    {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactive', 
+        inputErrorClass: 'popup__input_type_error',
+        errorActiveClass: 'popup__input-error_active'
+    },
+    document.querySelector('form[name="profile-info"]')
+);
 
+profileFormValidator.enableValidation();
 
+const placesFormValidator = new FormValidation(
+    {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactive', 
+        inputErrorClass: 'popup__input_type_error',
+        errorActiveClass: 'popup__input-error_active'
+    },
+    document.querySelector('form[name="new-place"]')
+);
 
-
+placesFormValidator.enableValidation();
