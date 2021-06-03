@@ -75,3 +75,14 @@ function enableValidation(config) {
         setEventListeners(formElement, restConfig);
     });
 };
+
+class FormValidation {
+    constructor(config, formSelector) {
+        this._config = config;
+        tnis._formSelector = formSelector;
+    }
+    
+    enableValidation() {
+        
+    }
+}
