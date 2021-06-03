@@ -25,14 +25,6 @@ const cardsContainer = document.querySelector('.elements');
 const openAddForm = document.querySelector('.profile__add-button');
 const closeAddForm = document.querySelector('.popup__close_btn_place');
 
-
-/// Объявление переменных для открытия картинки в полный размер в сплывающем окне ///
-const popupImage = document.querySelector('.popup_form_images');
-
-const fullImage = popupImage.querySelector('.popup__image');
-const imageTitle = popupImage.querySelector('.popup__title-image');
-
-
 /// Массив карточек "из коробки" ///
 const initialCards = [
     {
@@ -155,6 +147,7 @@ closeAddForm.addEventListener('click', function() {
 formPlaces.addEventListener('submit', handleSubmitAddForm); 
 
 
+// Валидация полей формы редактирования профайла //
 const profileFormValidator = new FormValidator(
     {
         formSelector: '.popup__form',
@@ -169,6 +162,7 @@ const profileFormValidator = new FormValidator(
 
 profileFormValidator.enableValidation();
 
+// Валидация полей формы добавления новой карточки //
 const placesFormValidator = new FormValidator(
     {
         formSelector: '.popup__form',
