@@ -13,7 +13,6 @@ const profileJob = document.querySelector('.profile__subtitle');
 const openEditFrom = document.querySelector('.profile__edit-button');
 const closeEditForm = document.querySelector('.popup__close_btn_profile');
 
-
 /// Объявление переменных для окна добавления новой карточки ///
 const popupAdd = document.querySelector('.popup_form_place');
 const formPlaces = popupAdd.querySelector('.popup__form_submit_place');
@@ -24,6 +23,14 @@ const cardsContainer = document.querySelector('.elements');
 
 const openAddForm = document.querySelector('.profile__add-button');
 const closeAddForm = document.querySelector('.popup__close_btn_place');
+
+/// Объявление переменных для открытия картинки в полный размер в сплывающем окне ///
+const popupImage = document.querySelector('.popup_form_images');
+const closeImage = document.querySelector('.popup__close_btn_image');
+
+const fullImage = popupImage.querySelector('.popup__image');
+const imageTitle = popupImage.querySelector('.popup__title-image');
+
 
 /// Массив карточек "из коробки" ///
 const initialCards = [
@@ -100,9 +107,17 @@ function handleSubmitAddForm (evt) {
     closePopup(popupAdd);
 };
 
+/// Функция для открытия карточки в полный размер в сплывающем окне ///
+function handleOpenFullImage(cardName, cardLink) {
+    openPopup(popupImage);
+    fullImage.src = cardLink;
+    fullImage.alt = cardName;
+    imageTitle.textContent = cardName;
+}
+
 /// Функция по давлению новой карточки на страницу + функция добавления карточек "из коробки" на страницу ///
 function createNewCard(data) {
-    const card = new Card(data.name, data.link, '#card-template');
+    const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
     
     return card.generateCard();
    };
@@ -146,33 +161,34 @@ closeAddForm.addEventListener('click', function() {
 
 formPlaces.addEventListener('submit', handleSubmitAddForm); 
 
+// закрытие карточки, открытой в полный размер //
+closeImage.addEventListener('click', function() {
+    closePopup(popupImage);
+});
 
-// Валидация полей формы редактирования профайла //
+/// Данные для валидации форм ///
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_inactive', 
+    inputErrorClass: 'popup__input_type_error',
+    errorActiveClass: 'popup__input-error_active'
+}
+
+// валидация полей формы редактирования профайла //
 const profileFormValidator = new FormValidator(
-    {
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__save',
-        inactiveButtonClass: 'popup__save_inactive', 
-        inputErrorClass: 'popup__input_type_error',
-        errorActiveClass: 'popup__input-error_active'
-    },
+    config,
     document.querySelector('form[name="profile-info"]')
 );
 
 profileFormValidator.enableValidation();
 
-// Валидация полей формы добавления новой карточки //
+// валидация полей формы добавления новой карточки //
 const placesFormValidator = new FormValidator(
-    {
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__save',
-        inactiveButtonClass: 'popup__save_inactive', 
-        inputErrorClass: 'popup__input_type_error',
-        errorActiveClass: 'popup__input-error_active'
-    },
+    config,
     document.querySelector('form[name="new-place"]')
 );
 
 placesFormValidator.enableValidation();
+
