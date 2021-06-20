@@ -1,6 +1,7 @@
 import FormValidator from './FormValidator.js'
 import Card from './Card.js'
 import Section from './Section.js'
+import PopupWithForm from './PopupWithForm.js'
 
 /// Объявление переменных для окна редактирования профиля ///
 const popupEdit = document.querySelector('.popup_form_profile');
@@ -17,8 +18,7 @@ const closeEditForm = document.querySelector('.popup__close_btn_profile');
 /// Объявление переменных для окна добавления новой карточки ///
 const popupAdd = document.querySelector('.popup_form_place');
 const formPlaces = popupAdd.querySelector('.popup__form_submit_place');
-const titleInput = popupAdd.querySelector('.popup__input_place_title');
-const linkInput = popupAdd.querySelector('.popup__input_place_link');
+
 
 const cardsContainer = document.querySelector('.elements');
 
@@ -71,7 +71,23 @@ const cardsSection = new Section ({
     '.elements'
     )
 
-cardsSection.renderItems();
+const addCardPopup = new PopupWithForm (
+    '.popup_form_place', 
+    (cardData) => {
+        cardsSection.addItem(cardData);
+        addCardPopup.close();
+    })
+
+const editProfilePopup = new PopupWithForm (
+    '.popup_form_profile', 
+    (profileData) => {
+        profileName.textContent = profileData.name;
+        profileJob.textContent = profileData.job;
+        editProfilePopup.close();
+    })
+
+
+
 
 /// Функции открытия-закрытия pop-up ///
 function openPopup(popupForm) {
@@ -102,32 +118,31 @@ function closePopupOverlay(evt) {
 
 
 /// Обработчики отправки формы ///
-function handleSubmitEditForm (evt) {
-    evt.preventDefault();    
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(popupEdit);
-};
+//function handleSubmitEditForm (evt) {
+//    evt.preventDefault();    
+//    profileName.textContent = nameInput.value;
+//    profileJob.textContent = jobInput.value;
+//    closePopup(popupEdit);
+//};
 
-function handleSubmitAddForm (evt) {
-    evt.preventDefault();    
-    cardsSection.addItem({
-        name: titleInput.value,
-        link: linkInput.value
-    })
-    closePopup(popupAdd);
-};
+//function handleSubmitAddForm (evt) {
+//    evt.preventDefault();    
+//    cardsSection.addItem({
+//        name: titleInput.value,
+//        link: linkInput.value
+//    })
+//    closePopup(popupAdd);
+//};
 
 /// Функция для открытия карточки в полный размер в сплывающем окне ///
 function handleOpenFullImage(cardName, cardLink) {
-    openPopup(popupImage);
+    openPopup(popupImage); 
     fullImage.src = cardLink;
     fullImage.alt = cardName;
     imageTitle.textContent = cardName;
 }
 
 /// Функция по давлению новой карточки на страницу ///( функция добавления карточек "из коробки" на страницу )///
-
 //function createNewCard(data) {
 //    const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
 //    
@@ -146,7 +161,7 @@ document.addEventListener('mousedown', closePopupOverlay);
 
 // окно редактирования //
 openEditFrom.addEventListener('click', function() {
-    openPopup(popupEdit);
+    editProfilePopup.open();
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent; 
     profileFormValidator.clearErrorElement();
@@ -156,14 +171,12 @@ closeEditForm.addEventListener('click', function() {
     closePopup(popupEdit);
 });
 
-formProfile.addEventListener('submit', handleSubmitEditForm); 
+//formProfile.addEventListener('submit', handleSubmitEditForm); 
 
 // окно добавления новой карточки //
 openAddForm.addEventListener('click', function() {
-    openPopup(popupAdd);
+    addCardPopup.open();
     formPlaces.reset();
-    ///titleInput.value = "";
-    ///linkInput.value = "";
     placesFormValidator.clearErrorElement();
 });
 
@@ -171,7 +184,7 @@ closeAddForm.addEventListener('click', function() {
     closePopup(popupAdd);
 });
 
-formPlaces.addEventListener('submit', handleSubmitAddForm); 
+//formPlaces.addEventListener('submit', handleSubmitAddForm); 
 
 // закрытие карточки, открытой в полный размер //
 closeImage.addEventListener('click', function() {
@@ -189,18 +202,18 @@ const config = {
 }
 
 // валидация полей формы редактирования профайла //
-const profileFormValidator = new FormValidator(
-    config,
-    document.querySelector('form[name="profile-info"]')
-);
-
-profileFormValidator.enableValidation();
+//const profileFormValidator = new FormValidator(
+//    config,
+//    document.querySelector('form[name="profile-info"]')
+//);
+//
+//profileFormValidator.enableValidation();
 
 // валидация полей формы добавления новой карточки //
-const placesFormValidator = new FormValidator(
-    config,
-    document.querySelector('form[name="new-place"]')
-);
-
-placesFormValidator.enableValidation();
-
+//const placesFormValidator = new FormValidator(
+//    config,
+//    document.querySelector('form[name="new-place"]')
+//);
+//
+//placesFormValidator.enableValidation();
+//

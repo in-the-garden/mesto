@@ -4,6 +4,8 @@ class Section {
         this._renederer = renderer;
 
         this._element = document.querySelector(containerSelector);
+        
+        this.renderItems();
     }
 
     renderItems() {
@@ -14,8 +16,7 @@ class Section {
     }
 
     addItem(item) {
-        const card = this._renederer(item); 
-        this._element.prepend(card);
+        this._element.prepend(this._renederer(item));
     }
 }
 
