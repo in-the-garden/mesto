@@ -8,13 +8,14 @@ class Section {
 
     renderItems() {
         this._items.forEach((item) => {
-            const htmlElement = this._renederer(item);
-            this.addItem(htmlElement);
+            const card = this._renederer(item);
+            this._element.append(card);
         })
     }
 
-    addItem(htmlElement) {
-        this._element.append(htmlElement);
+    addItem(item) {
+        const card = this._renederer(item); 
+        this._element.prepend(card);
     }
 }
 

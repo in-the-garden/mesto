@@ -63,8 +63,8 @@ const initialCards = [
 
 const cardsSection = new Section ({
     items: initialCards,
-    renderer: (data) => {
-        const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
+    renderer: (cardElement) => {
+        const card = new Card(cardElement.name, cardElement.link, '#card-template', handleOpenFullImage);
         return card.generateCard(); 
     }
     },
@@ -111,11 +111,10 @@ function handleSubmitEditForm (evt) {
 
 function handleSubmitAddForm (evt) {
     evt.preventDefault();    
-    const data = {
+    cardsSection.addItem({
         name: titleInput.value,
         link: linkInput.value
-    }
-    cardsContainer.prepend(createNewCard(data));
+    })
     closePopup(popupAdd);
 };
 
@@ -129,12 +128,12 @@ function handleOpenFullImage(cardName, cardLink) {
 
 /// Функция по давлению новой карточки на страницу ///( функция добавления карточек "из коробки" на страницу )///
 
-function createNewCard(data) {
-    const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
-    
-    return card.generateCard();
-   };
-
+//function createNewCard(data) {
+//    const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
+//    
+//    return card.generateCard();
+//   };
+//
 //initialCards.forEach((item) => {
 //    const newCard = createNewCard(item);
 //    cardsContainer.append(newCard);
