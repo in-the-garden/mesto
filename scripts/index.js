@@ -1,5 +1,6 @@
 import FormValidator from './FormValidator.js'
 import Card from './Card.js'
+import Section from './Section.js'
 
 /// Объявление переменных для окна редактирования профиля ///
 const popupEdit = document.querySelector('.popup_form_profile');
@@ -60,6 +61,17 @@ const initialCards = [
     }
   ];
 
+const cardsSection = new Section ({
+    items: initialCards,
+    renderer: (data) => {
+        const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
+        return card.generateCard(); 
+    }
+    },
+    '.elements'
+    )
+
+cardsSection.renderItems();
 
 /// Функции открытия-закрытия pop-up ///
 function openPopup(popupForm) {
@@ -115,17 +127,18 @@ function handleOpenFullImage(cardName, cardLink) {
     imageTitle.textContent = cardName;
 }
 
-/// Функция по давлению новой карточки на страницу + функция добавления карточек "из коробки" на страницу ///
+/// Функция по давлению новой карточки на страницу ///( функция добавления карточек "из коробки" на страницу )///
+
 function createNewCard(data) {
     const card = new Card(data.name, data.link, '#card-template', handleOpenFullImage);
     
     return card.generateCard();
    };
 
-initialCards.forEach((item) => {
-    const newCard = createNewCard(item);
-    cardsContainer.append(newCard);
-});
+//initialCards.forEach((item) => {
+//    const newCard = createNewCard(item);
+//    cardsContainer.append(newCard);
+//});
 
 
 /// Слушатели событий ///
