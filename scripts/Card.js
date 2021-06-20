@@ -4,21 +4,11 @@ class Card {
         this._link = link;
         this._templateSelector = templateSelector;
         this._handleOpenFullImage = handleOpenFullImage;
-        this._makeElements();
-        this._setEventListeners();
     }
     
     _makeElements() {
         const cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.element');
         this._cardElement = cardTemplate.cloneNode('true');
-
-        this._likeButton = this._cardElement.querySelector('.element__heart-button');
-        this._removeButton = this._cardElement.querySelector('.element__remove-button');
-        this._cardImage = this._cardElement.querySelector('.element__image');
-
-        this._cardElement.querySelector('.element__title').textContent = this._name;
-        this._cardImage.src = this._link;
-        this._cardImage.alt = this._name;
     }
 
     _setEventListeners() {
@@ -36,6 +26,15 @@ class Card {
     }
 
     generateCard() {
+        this._makeElements();
+        this._likeButton = this._cardElement.querySelector('.element__heart-button');
+        this._removeButton = this._cardElement.querySelector('.element__remove-button');
+        this._cardImage = this._cardElement.querySelector('.element__image');
+
+        this._cardElement.querySelector('.element__title').textContent = this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._setEventListeners();
         return this._cardElement;
     }
 }

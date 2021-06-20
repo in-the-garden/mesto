@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Наш проект - одностраничный [сайт](https://in-the-garden.github.io/mesto/). \r Состоит из следующих блоков:\r   * блок \"header\" - шапка страницы;\r   * блок \"profile\" - персональная информация о путешественнике c возможность редактировать профиль и  \r   добавлять новые элементы на страницу;\r   * блок \"element\" - отражены все ранее загруженные места;\r   * блок \"footer\" - информационная о создателе сайта.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/in-the-garden/mesto.git"
+  },
+  "author": "in-the-garden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/in-the-garden/mesto/issues"
+  },
+  "homepage": "https://github.com/in-the-garden/mesto#readme"
+}
