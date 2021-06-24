@@ -28,6 +28,11 @@ class PopupWithForm extends Popup {
             this._onSubmitCb(cardData);
         });
     }
+
+    close() {
+        super.close();
+        this._formElement.reset();
+    }
 }
 
 export default PopupWithForm

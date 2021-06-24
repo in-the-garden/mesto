@@ -1,8 +1,9 @@
 import FormValidator from './FormValidator.js'
 import Card from './Card.js'
 import Section from './Section.js'
-import Popup from './Popup.js'
+import PopupWithImage from './PopupWithImage.js'
 import PopupWithForm from './PopupWithForm.js'
+import UserInfo from './UserInfo.js'
 
 
 /// Объявление переменных для окна редактирования профиля ///
@@ -20,7 +21,6 @@ const closeEditForm = document.querySelector('.popup__close_btn_profile');
 /// Объявление переменных для окна добавления новой карточки ///
 const popupAdd = document.querySelector('.popup_form_place');
 const formPlaces = popupAdd.querySelector('.popup__form_submit_place');
-
 
 const cardsContainer = document.querySelector('.elements');
 
@@ -66,7 +66,7 @@ const initialCards = [
 const cardsSection = new Section ({
     items: initialCards,
     renderer: (cardElement) => {
-        const card = new Card(cardElement.name, cardElement.link, '#card-template', handleOpenFullImage);
+        const card = new Card(cardElement.name, cardElement.link, '#card-template', handleCardClick);
         return card.generateCard(); 
     }
     },
@@ -80,23 +80,27 @@ const addCardPopup = new PopupWithForm (
         addCardPopup.close();
     })
 
+const editForm = new UserInfo('.profile__title', '.profile__subtitle');
 
 const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
-        profileName.textContent = profileData.name;
-        profileJob.textContent = profileData.job;
+        editForm.setUserInfo(profileData);
         editProfilePopup.close();
     })
 
 
 /// Функция для открытия карточки в полный размер в сплывающем окне ///
-function handleOpenFullImage(cardName, cardLink) {
-    openPopup(popupImage); 
-    fullImage.src = cardLink;
-    fullImage.alt = cardName;
-    imageTitle.textContent = cardName;
+function handleCardClick(cardName, cardLink) {
+    const totalImage = new PopupWithImage ('.popup_form_images', cardName, cardLink);
 }
+
+//function handleOpenFullImage(cardName, cardLink) {
+//    openPopup(popupImage); 
+//    fullImage.src = cardLink;
+//    fullImage.alt = cardName;
+//    imageTitle.textContent = cardName;
+//}
 // закрытие карточки, открытой в полный размер //
 //closeImage.addEventListener('click', function() {
 //    closePopup(popupImage);
@@ -109,15 +113,13 @@ document.addEventListener('mousedown', closePopupOverlay);
 // окно редактирования //
 openEditFrom.addEventListener('click', function() {
     editProfilePopup.open();
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent; 
+    editForm.getUserInfo();
     profileFormValidator.clearErrorElement();
 });
 
 // окно добавления новой карточки //
 openAddForm.addEventListener('click', function() {
     addCardPopup.open();
-    formPlaces.reset();
     placesFormValidator.clearErrorElement();
 });
 
@@ -150,10 +152,10 @@ placesFormValidator.enableValidation();
 
 
 /// Функции открытия-закрытия pop-up ///
-function openPopup(popupForm) {
-    popupForm.classList.add('popup_is-opened');
-};
-
+//function openPopup(popupForm) {
+//    popupForm.classList.add('popup_is-opened');
+//};
+//
 function closePopup(popupForm) {
     popupForm.classList.remove('popup_is-opened');
 };

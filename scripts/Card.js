@@ -1,9 +1,9 @@
 class Card {
-    constructor(name, link, templateSelector, handleOpenFullImage) {
+    constructor(name, link, templateSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
-        this._handleOpenFullImage = handleOpenFullImage;
+        this.handleCardClick = handleCardClick;
     }
     
     _makeElements() {
@@ -14,7 +14,7 @@ class Card {
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._handleLikeClick);
         this._removeButton.addEventListener('click', this._handleRemoveClick);
-        this._cardImage.addEventListener('click', () => this._handleOpenFullImage(this._name, this._link));
+        this._cardImage.addEventListener('click', () => this.handleCardClick(this._name, this._link));
     }
 
     _handleLikeClick = () => {
