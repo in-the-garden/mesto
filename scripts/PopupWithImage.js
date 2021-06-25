@@ -7,6 +7,7 @@ class PopupWithImage extends Popup {
         this._link = link;   
 
         this._open();
+        this.setEventListeners();
     }
 
     _open() {
@@ -18,6 +19,14 @@ class PopupWithImage extends Popup {
         this._nameImage.alt = this._name;
         this._nameImage.textContent = this._name;
     }
+
+    close() {
+        super.close();
+    }
+
+    setEventListeners() {
+        super.setEventListeners();
+     }
 }
 
 export default PopupWithImage
