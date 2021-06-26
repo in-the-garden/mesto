@@ -1,19 +1,39 @@
 {
   "name": "mesto",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Наш проект - одностраничный [сайт](https://in-the-garden.github.io/mesto/). \r Состоит из следующих блоков:\r   * блок \"header\" - шапка страницы;\r   * блок \"profile\" - персональная информация о путешественнике c возможность редактировать профиль и  \r   добавлять новые элементы на страницу;\r   * блок \"element\" - отражены все ранее загруженные места;\r   * блок \"footer\" - информационная о создателе сайта.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/in-the-garden/mesto.git"
   },
-  "author": "in-the-garden",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/in-the-garden/mesto/issues"
   },
-  "homepage": "https://github.com/in-the-garden/mesto#readme"
+  "homepage": "https://github.com/in-the-garden/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "autoprefixer": "^10.2.6",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^5.2.6",
+    "cssnano": "^5.0.6",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^1.6.1",
+    "postcss-loader": "^6.1.0",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "core-js": "^3.15.1",
+    "jquery": "^3.6.0"
+  }
 }

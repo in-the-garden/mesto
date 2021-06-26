@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!--<link rel="stylesheet" href="./pages/index.css">-->
 </head>
 <body class="body">
     <div class="page body__container">
         <header class="header">
-            <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Место">
+            <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип Место">
         </header>
 
         <main class="content"> 
             <section class="profile">
                 <div class="profile__personal-info">
-                    <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                    <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__edit-button"></button>
@@ -36,7 +36,7 @@
 
     <div class="popup popup_form_profile">
         <form class="popup__form popup__form_submit_profile" name="profile-info" novalidate>
-            <button class="popup__close popup__close_btn_profile" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
+            <button class="popup__close popup__close_btn_profile" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <input id="info-name" class="popup__input popup__input_info_name" type="text" name="name" minlength="2" maxlength="40" required>
             <span class="popup__input-error info-name-error"></span>
@@ -48,7 +48,7 @@
 
     <div class="popup popup_form_place">
         <form class="popup__form popup__form_submit_place" name="new-place" novalidate> 
-            <button class="popup__close popup__close_btn_place" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
+            <button class="popup__close popup__close_btn_place" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
             <h2 class="popup__title">Новое место</h2>
             <input id="place-title" class="popup__input popup__input_place_title" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
             <span class="popup__input-error place-title-error"></span>
@@ -60,7 +60,7 @@
 
     <div class="popup popup_form_images">
         <div class="popup__form popup__form_submit_image"> 
-            <button class="popup__close popup__close_btn_image" type="button"><img class="popup__close-icon" src="./images/close-icon.svg" alt="Кнопка закрыть"></button>
+            <button class="popup__close popup__close_btn_image" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
             <img class="popup__image" src="#" alt="#">
             <p class="popup__title-image"></p>
         </div>
@@ -77,6 +77,6 @@
         </article>
     </template>
 
-    <script type="module" src="./scripts/index.js" defer></script>
+    <!--<script type="module" src="./pages/index.js" defer></script>-->
 </body>
 </html>

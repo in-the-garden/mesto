@@ -1,65 +1,13 @@
-import FormValidator from './FormValidator.js'
-import Card from './Card.js'
-import Section from './Section.js'
-import PopupWithImage from './PopupWithImage.js'
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js'
-import Popup from './Popup.js'
-
-
-/// Объявление переменных для форм ///
-const openEditFrom = document.querySelector('.profile__edit-button');
-const openAddForm = document.querySelector('.profile__add-button');
-
-
-/// Массив карточек "из коробки" ///
-const initialCards = [
-    {
-      name: 'Гаваи',
-      link: './images/hawaii.jpg'
-    },
-    {
-      name: 'Вулкан Мауна-Лоа',
-      link: './images/mauna-loa.jpg'
-    },
-    {
-      name: 'Норвегия',
-      link: './images/norway.jpg'
-    },
-    {
-      name: 'Большой каньон',
-      link: './images/grand-canyon.jpg'
-    },
-    {
-      name: 'Исландия',
-      link: './images/iceland.jpg'
-    },
-    {
-      name: 'Фареры',
-      link: './images/faroe-islands.jpg'
-    }
-  ];
-
-
-/// Функция закрытия pop-up  ///
-function closePopupOverlay(evt) {
-    if (evt.target.classList.contains('popup')) {
-        const popupSelector = `.${evt.target.classList[1]}`;
-        const popup = new Popup(popupSelector);
-        const popupForm = document.querySelector('.popup__form_submit_place');
-        popupForm.reset();
-        popup.close();
-    };
-};
+import FormValidator from '../components/FormValidator.js'
+import Card from '../components/Card.js'
+import Section from '../components/Section.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
+import { openEditFrom, openAddForm, initialCards } from '../utils/constants.js'
+import { closePopupOverlay, handleCardClick } from '../utils/utils.js'
+import './index.css';
 
 document.addEventListener('mousedown', closePopupOverlay);
-
-
-/// Функция для открытия карточки в полный размер в сплывающем окне ///
-function handleCardClick(cardName, cardLink) {
-    const totalImage = new PopupWithImage ('.popup_form_images', cardName, cardLink);
-}
-
 
 /// Создание экземпляров классов для pop-up ///
 
