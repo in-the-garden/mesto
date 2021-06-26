@@ -5,6 +5,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import { openEditFrom, openAddForm, initialCards } from '../utils/constants.js'
 import { closePopupOverlay, handleCardClick } from '../utils/utils.js'
+import './index.css';
 
 document.addEventListener('mousedown', closePopupOverlay);
 
