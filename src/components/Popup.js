@@ -19,8 +19,15 @@ class Popup {
         };
     }
 
+    _handleOverlayClose = (evt)  => { 
+        if (evt.target.classList.contains('popup')) { 
+            this.close();  
+        };
+    }
+
     setEventListeners() {
        this._popupElement.querySelector('.popup__close').addEventListener('click', () => this.close(this._popupElement));
+       document.addEventListener('mousedown', this._handleOverlayClose); 
     }
 }
 

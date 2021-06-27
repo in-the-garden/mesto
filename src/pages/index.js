@@ -2,19 +2,19 @@ import FormValidator from '../components/FormValidator.js'
 import Card from '../components/Card.js'
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, openAddForm, initialCards } from '../utils/constants.js'
-import { closePopupOverlay, handleCardClick } from '../utils/utils.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, initialCards } from '../utils/constants.js'
+//import { handleCardClick } from '../utils/utils.js'
 import './index.css';
 
-document.addEventListener('mousedown', closePopupOverlay);
 
 /// Создание экземпляров классов для pop-up ///
 
 const cardsSection = new Section ({
     items: initialCards,
-    renderer: (cardElement) => {
-        const card = new Card(cardElement.name, cardElement.link, '#card-template', handleCardClick);
+    renderer: (item) => {
+        const card = new Card(item.name, item.link, '#card-template', handleCardClick);
         return card.generateCard(); 
     }
     },
@@ -28,19 +28,29 @@ const addCardPopup = new PopupWithForm (
         addCardPopup.close();
     })
 
-const editForm = new UserInfo('.profile__title', '.profile__subtitle');
-
 const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
-        editForm.setUserInfo(profileData);
+        userInfo.setUserInfo(profileData);
         editProfilePopup.close();
     })
+
+const popupImage = new PopupWithImage('.popup_form_images');
+
+function handleCardClick(cardName, cardLink) {
+    popupImage.open(cardName, cardLink);
+}
+
+popupImage.setEventListeners();
+
+const userInfo = new UserInfo({name:'.profile__title', job:'.profile__subtitle'});
 
 // форма редактирования //
 openEditFrom.addEventListener('click', function() {
     editProfilePopup.open();
-    editForm.getUserInfo();
+    const userData = userInfo.getUserInfo();
+    nameInput.value = userData.name;
+    jobInput.value = userData.job
     profileFormValidator.clearErrorElement();
 });
 
