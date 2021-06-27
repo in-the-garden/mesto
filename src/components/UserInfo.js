@@ -1,16 +1,15 @@
 class UserInfo{
-    constructor(nameSelector, jobSelector) {
-        this._name = document.querySelector(nameSelector);
-        this._job = document.querySelector(jobSelector);
+    constructor({name, job}) {
+        this._name = document.querySelector(name);
+        this._job = document.querySelector(job);
     }
 
     getUserInfo() {
-        const popupEdit = document.querySelector('.popup_form_profile');
-        const nameInput = popupEdit.querySelector('.popup__input_info_name');
-        const jobInput = popupEdit.querySelector('.popup__input_info_job');
-        
-        nameInput.value = this._name.textContent;
-        jobInput.value = this._job.textContent
+        this._userData = {
+            name: this._name.textContent,
+            job: this._job.textContent
+        }
+        return this._userData;
     }
 
     setUserInfo(inputValues) {
