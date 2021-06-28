@@ -17,56 +17,30 @@ const faroeIslands = new URL('../images/faroe-islands.jpg', import.meta.url);
 
 /// Массив карточек "из коробки" ///
 export const initialCards = [
-    {
-      name: 'Гаваи',
-      link: hawaii
-    },
-    {
-      name: 'Вулкан Мауна-Лоа',
-      link: maunaLoa
-    },
-    {
-      name: 'Норвегия',
-      link: norway
-    },
-    {
-      name: 'Большой каньон',
-      link: grandCanyon
-    },
-    {
-      name: 'Исландия',
-      link: iceland
-    },
-    {
-      name: 'Фареры',
-      link: faroeIslands
-    }
-  ];
+  {
+    name: 'Фареры',
+    link: faroeIslands
+  },
+  {
+    name: 'Исландия',
+    link: iceland
+  },
+  {
+    name: 'Большой каньон',
+    link: grandCanyon
+  },
+  {
+    name: 'Норвегия',
+    link: norway
+  },
+  {
+    name: 'Вулкан Мауна-Лоа',
+    link: maunaLoa
+  },
+  {
+    name: 'Гаваи',
+    link: hawaii
+  } 
+];
 
   
-//export const initialCards = [
-//  {
-//    name: 'Гаваи',
-//    link: './images/hawaii.jpg'
-//  },
-//  {
-//    name: 'Вулкан Мауна-Лоа',
-//    link: './images/mauna-loa.jpg'
-//  },
-//  {
-//    name: 'Норвегия',
-//    link: './images/norway.jpg'
-//  },
-//  {
-//    name: 'Большой каньон',
-//    link: './images/grand-canyon.jpg'
-//  },
-//  {
-//    name: 'Исландия',
-//    link: './images/iceland.jpg'
-//  },
-//  {
-//    name: 'Фареры',
-//    link: './images/faroe-islands.jpg'
-//  }
-//];
