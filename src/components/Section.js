@@ -4,15 +4,14 @@ class Section {
         this._renderer = renderer;
 
         this._element = document.querySelector(containerSelector);
-        this.renderItems();
     }
 
     renderItems() {
-        this._items.forEach((item) => this.addItem(item))
+        this._items.forEach((item) => this._renderer(item))
     }
 
     addItem(card) {
-        this._element.prepend(this._renderer(card));
+        this._element.prepend(card);
     }
 }
 

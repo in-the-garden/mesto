@@ -10,21 +10,28 @@ import './index.css';
 
 
 /// Создание экземпляров классов для pop-up ///
+function createCard(item) {
+    const card = new Card(item.name, item.link, '#card-template', handleCardClick);
+    return card.generateCard();
+}
 
 const cardsSection = new Section ({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item.name, item.link, '#card-template', handleCardClick);
-        return card.generateCard(); 
+        const cardElement = createCard(item); 
+        cardsSection.addItem(cardElement);
     }
     },
     '.elements'
     )
 
+cardsSection.renderItems();
+
 const addCardPopup = new PopupWithForm (
     '.popup_form_place', 
     (cardData) => {
-        cardsSection.addItem(cardData);
+        const cardElement = createCard(cardData);
+        cardsSection.addItem(cardElement);
         addCardPopup.close();
     })
 
@@ -40,8 +47,6 @@ const popupImage = new PopupWithImage('.popup_form_images');
 function handleCardClick(cardName, cardLink) {
     popupImage.open(cardName, cardLink);
 }
-
-popupImage.setEventListeners();
 
 const userInfo = new UserInfo({name:'.profile__title', job:'.profile__subtitle'});
 
