@@ -26,8 +26,8 @@ class Popup {
     }
 
     setEventListeners() {
-       this._popupElement.querySelector('.popup__close').addEventListener('click', () => this.close(this._popupElement));
-       document.addEventListener('mousedown', this._handleOverlayClose); 
+        this._popupElement.querySelector('.popup__close').addEventListener('click', () => this.close(this._popupElement));
+        document.addEventListener('mousedown', this._handleOverlayClose); 
     }
 }
 
