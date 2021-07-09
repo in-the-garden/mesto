@@ -6,6 +6,8 @@ export const jobInput = document.querySelector('.popup__input_info_job');
 
 export const openAddForm = document.querySelector('.profile__add-button');
 
+export const openDeleteForm = document.querySelector('.element__remove-button');
+
 // импорт картинок
 const hawaii = new URL('../images/hawaii.jpg', import.meta.url);
 const maunaLoa = new URL('../images/mauna-loa.jpg', import.meta.url);

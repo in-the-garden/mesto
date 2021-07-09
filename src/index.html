@@ -39,7 +39,7 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input id="info-name" class="popup__input popup__input_info_name" type="text" name="name" minlength="2" maxlength="40" required>
             <span class="popup__input-error info-name-error"></span>
-            <input id="info-job" class="popup__input popup__input_info_job" type="text" name="job" minlength="2" maxlength="200" required>
+            <input id="info-job" class="popup__input popup__input_info_job" type="text" name="about" minlength="2" maxlength="200" required>
             <span class="popup__input-error info-job-error"></span>
             <button class="popup__save" type="submit">Сохранить</button>
         </form>
@@ -65,12 +65,23 @@
         </div>
     </div>
 
+    <div class="popup popup_form_card-dlt">
+        <form class="popup__form popup__form_submit_card-dlt" name="card-dlt" novalidate> 
+            <button class="popup__close popup__close_btn_card-dlt" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__save popup__save_btn_card-dlt" type="submit">Да</button>
+        </form>
+    </div>
+
     <template id="card-template" class="card-template">
         <article class="element">
             <img class="element__image" src="#" alt="#">
             <div class="element__info">
                 <h2 class="element__title"></h2>
-                <button type="button" class="element__heart-button"></button>      
+                <div class="element__heart-counter">
+                    <button type="button" class="element__heart-button"></button>
+                    <p class="element__counter">1</p>
+                </div>
             </div>
             <button type="button" class="element__remove-button"></button>
         </article>
