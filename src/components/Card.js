@@ -1,9 +1,12 @@
 class Card {
-    constructor(name, link, templateSelector, handleCardClick) {
-        this._name = name;
-        this._link = link;
+    constructor({item}, templateSelector, handleCardClick, handleCardDelete) {
+        this._item = item;
+        this._name = item.name;
+        this._link = item.link;
+        this._currentUserId = item.myUserId;
         this._templateSelector = templateSelector;
         this.handleCardClick = handleCardClick;
+        this.handleCardDelete = handleCardDelete;
     }
     
     _makeElements() {
@@ -22,7 +25,7 @@ class Card {
     }
 
     _handleRemoveClick = () => {
-        this._cardElement.remove();
+        this.handleCardDelete(this._item, this._cardElement);
     }
 
     generateCard() {
@@ -35,6 +38,11 @@ class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
         this._setEventListeners();
+
+        if (this._item.owner._id !== this._currentUserId) {
+            this._removeButton.remove();
+        }
+//
         return this._cardElement;
     }
 }
