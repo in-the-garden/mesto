@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Место</title>
-  <!--<link rel="stylesheet" href="./pages/index.css">-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <!--<link rel="stylesheet" href="./pages/index.css">-->
 </head>
 <body class="body">
     <div class="page body__container">
@@ -15,7 +15,7 @@
         <main class="content"> 
             <section class="profile">
                 <div class="profile__personal-info">
-                    <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+                    <button type="button" class="profile__edit-avatar-button"><img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар"></button>
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__edit-button"></button>
@@ -25,7 +25,6 @@
                 <button type="button" class="profile__add-button"></button>
             </section>
             <section class="elements">
-              
             </section>
         </main>
 
@@ -40,7 +39,7 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input id="info-name" class="popup__input popup__input_info_name" type="text" name="name" minlength="2" maxlength="40" required>
             <span class="popup__input-error info-name-error"></span>
-            <input id="info-job" class="popup__input popup__input_info_job" type="text" name="job" minlength="2" maxlength="200" required>
+            <input id="info-job" class="popup__input popup__input_info_job" type="text" name="about" minlength="2" maxlength="200" required>
             <span class="popup__input-error info-job-error"></span>
             <button class="popup__save" type="submit">Сохранить</button>
         </form>
@@ -66,12 +65,33 @@
         </div>
     </div>
 
+    <div class="popup popup_form_card-dlt">
+        <form class="popup__form popup__form_submit_card-dlt" name="card-dlt" novalidate> 
+            <button class="popup__close popup__close_btn_card-dlt" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__confirm popup__confirm_btn_card-dlt" type="submit">Да</button>
+        </form>
+    </div>
+
+    <div class="popup popup_form_edit-ava">
+        <form class="popup__form popup__form_submit_edit-ava" name="edit-ava" novalidate> 
+            <button class="popup__close popup__close_btn_edit-ava" type="button"><img class="popup__close-icon" src="<%=require('./images/close-icon.svg')%>" alt="Кнопка закрыть"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <input id="ava-link" class="popup__input popup__input_ava_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error popup__input_error_ava ava-link-error"></span>
+            <button class="popup__save popup__save_btn_edit-ava" type="submit">Сохранить</button>
+        </form>
+    </div>
+
     <template id="card-template" class="card-template">
         <article class="element">
             <img class="element__image" src="#" alt="#">
             <div class="element__info">
                 <h2 class="element__title"></h2>
-                <button type="button" class="element__heart-button"></button>      
+                <div class="element__heart-counter">
+                    <button type="button" class="element__heart-button"></button>
+                    <p class="element__counter">0</p>
+                </div>
             </div>
             <button type="button" class="element__remove-button"></button>
         </article>

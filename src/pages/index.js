@@ -2,68 +2,155 @@ import FormValidator from '../components/FormValidator.js'
 import Card from '../components/Card.js'
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithFormSubmit from '../components/PopupWithFormSubmit.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, nameInput, jobInput, openAddForm, initialCards } from '../utils/constants.js'
-//import { handleCardClick } from '../utils/utils.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm, avatar } from '../utils/constants.js'
 import './index.css';
+import { Api } from '../components/Api.js'
 
 
-/// Создание экземпляров классов для pop-up ///
-function createCard(item) {
-    const card = new Card(item.name, item.link, '#card-template', handleCardClick);
-    return card.generateCard();
+const cardsConfig = {
+    placesWrap: '.elements',
+    cardSelector: '#card-template'
 }
 
-const cardsSection = new Section ({
-    items: initialCards,
-    renderer: (item) => {
-        const cardElement = createCard(item); 
-        cardsSection.addItem(cardElement);
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+    headers: {
+        authorization: 'ce70ff0c-5fe1-4423-971f-ea76dc4add5d',
+        'Content-Type': 'application/json'
     }
-    },
-    '.elements'
-    )
+}); 
 
-cardsSection.renderItems();
+let myUserId = null;
 
-const addCardPopup = new PopupWithForm (
-    '.popup_form_place', 
-    (cardData) => {
-        const cardElement = createCard(cardData);
-        cardsSection.addItem(cardElement);
-        addCardPopup.close();
-    })
+const cardsSection = new Section ({
+    renderer: (item) => {
+        cardsSection.addItem(createCard(item));
+    }
+},
+    cardsConfig.placesWrap
+);
+
+const profileInfo = new UserInfo({name:'.profile__title', about:'.profile__subtitle'});
+
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+]).then(([userInfo, cards]) => {
+    avatar.src = userInfo.avatar;
+    myUserId = userInfo._id;
+    profileInfo.setUserInfo(userInfo);
+    cardsSection.renderItems(cards);
+}).catch(err => console.log('Ошибка', err)
+);
 
 const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
-        userInfo.setUserInfo(profileData);
+        profileInfo.setUserInfo(profileData);
+        api.updateUserInfo(profileData)
+        .catch(err => console.log('Ошибка', err)
+        ).finally(() => {
+            editProfilePopup.renderLoading(false);
+        });
         editProfilePopup.close();
     })
 
+openEditFrom.addEventListener('click', function() {
+    editProfilePopup.open();
+    const userData = profileInfo.getUserInfo();
+    nameInput.value = userData.name.textContent;
+    jobInput.value = userData.about.textContent;
+    profileFormValidator.clearErrorElement();
+});  
+
+/// Создание экземпляров классов для pop-up ///
+const cardDeletePopup = new PopupWithFormSubmit('.popup_form_card-dlt');
 const popupImage = new PopupWithImage('.popup_form_images');
+
+function createCard(item) {
+    const card = new Card({
+        item: {...item, myUserId}},
+        cardsConfig.cardSelector,
+        {
+        onLikeClick: (item, isLiked) => {
+            if (!isLiked) {
+                api.setLike(item).then((res) => {
+                    card.setAmountLikes(res);
+                    card.setLike();
+                })
+                .catch(err => console.log('Ошибка', err)
+                );
+            } else {
+                api.deleteLike(item).then((res) => {
+                    card.setAmountLikes(res);
+                    card.setLike();
+                })
+                .catch(err => console.log('Ошибка', err)
+                );
+            }
+        },
+        handleCardClick,
+        handleCardDelete
+    }
+    );
+    return card.generateCard();
+}
 
 function handleCardClick(cardName, cardLink) {
     popupImage.open(cardName, cardLink);
 }
 
-const userInfo = new UserInfo({name:'.profile__title', job:'.profile__subtitle'});
+function handleCardDelete(item, cardElement) {
+    cardDeletePopup.open();
+    cardDeletePopup.setSubmitAction(() => {
+        api.deleteCard(item).then(() => {
+            cardElement.remove();
+            cardDeletePopup.close();
+        }).catch((err) => {
+            console.log('Ошибка', err);
+        })
+    })
+}
 
-// форма редактирования //
-openEditFrom.addEventListener('click', function() {
-    editProfilePopup.open();
-    const userData = userInfo.getUserInfo();
-    nameInput.value = userData.name;
-    jobInput.value = userData.job
-    profileFormValidator.clearErrorElement();
-});
+const addCardPopup = new PopupWithForm (
+    '.popup_form_place', 
+    (cardData) => {
+        api.loadNewCard(cardData).then((item) => {
+            cardsSection.addItem(createCard(item));
+            addCardPopup.close();
+        }).catch(err => console.log('Ошибка', err)
+        ).finally(() => {
+            addCardPopup.renderLoading(false);
+        });
+    })
 
-// форма добавления новой карточки //
 openAddForm.addEventListener('click', function() {
     addCardPopup.open();
     placesFormValidator.clearErrorElement();
 });
+
+const editAvaProfilePopup = new PopupWithForm (
+    '.popup_form_edit-ava',
+    (input) => {
+        api.changeAva(input).then((item) => {
+            avatar.src = item.avatar;
+        })
+        .catch(err => console.log('Ошибка', err)
+        ).finally(() => {
+            editAvaProfilePopup.renderLoading(false);
+        });
+        editAvaProfilePopup.close();
+    }
+)
+
+openAvaEditForm.addEventListener('click', function() {
+    editAvaProfilePopup.open();
+    avaFormValidator.clearErrorElement();
+})
+
 
 /// Данные для валидации форм ///
 const config = {
@@ -90,4 +177,13 @@ const placesFormValidator = new FormValidator(
 );
 
 placesFormValidator.enableValidation();
+
+// валидация поля формы по смене аватара //
+const avaFormValidator = new FormValidator(
+    config,
+    document.querySelector('form[name="edit-ava"]')
+);
+
+avaFormValidator.enableValidation();
+
 
