@@ -9,7 +9,7 @@ import { openEditFrom, nameInput, jobInput, openAddForm } from '../utils/constan
 //import { handleCardClick } from '../utils/utils.js'
 import './index.css';
 import { Api } from '../components/Api.js'
-import { ajaxPrefilter } from 'jquery'
+//import { ajaxPrefilter } from 'jquery'
 
 const cardsConfig = {
     placesWrap: '.elements',
@@ -40,10 +40,12 @@ Promise.all([
     api.getUserInfo(),
     api.getInitialCards()
 ]).then(([userInfo, cards]) => {
+    console.log(cards);
     myUserId = userInfo._id;
     profileInfo.setUserInfo(userInfo);
     cardsSection.renderItems(cards);
-})
+}).catch(err => console.log('Ошибка', err)
+);
 
 const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
@@ -63,21 +65,42 @@ openEditFrom.addEventListener('click', function() {
 
 /// Создание экземпляров классов для pop-up ///
 const cardDeletePopup = new PopupWithFormSubmit('.popup_form_card-dlt');
+const popupImage = new PopupWithImage('.popup_form_images');
 
 function createCard(item) {
     const card = new Card({
         item: {...item, myUserId}},
-        cardsConfig.cardSelector, 
+        cardsConfig.cardSelector,
+        {
+        onLikeClick: (item, isLiked) => {
+            if (!isLiked) {
+                console.log(card);
+                api.setLike(item).then((res) => {
+                    card.setAmountLikes(res);
+                    card.setLike();
+                })
+            } else {
+                console.log(card);
+                api.deleteLike(item).then((res) => {
+                    card.setAmountLikes(res);
+                    card.setLike();
+                })
+            }
+        },
         handleCardClick,
         handleCardDelete
+    }
     );
     return card.generateCard();
+}
+
+function handleCardClick(cardName, cardLink) {
+    popupImage.open(cardName, cardLink);
 }
 
 function handleCardDelete(item, cardElement) {
     cardDeletePopup.open();
     cardDeletePopup.setSubmitAction(() => {
-        console.log(cardElement);
         api.deleteCard(item).then(() => {
             cardElement.remove();
             cardDeletePopup.close();
@@ -87,21 +110,15 @@ function handleCardDelete(item, cardElement) {
     })
 }
 
-
-const popupImage = new PopupWithImage('.popup_form_images');
-
-function handleCardClick(cardName, cardLink) {
-    popupImage.open(cardName, cardLink);
-}
-
-
 const addCardPopup = new PopupWithForm (
     '.popup_form_place', 
     (cardData) => {
         api.loadNewCard(cardData).then((item) => {
+            console.log(item);
             cardsSection.addItem(createCard(item));
             addCardPopup.close();
-        });
+        }).catch(err => console.log('Ошибка', err)
+        );
     })
 
 openAddForm.addEventListener('click', function() {
