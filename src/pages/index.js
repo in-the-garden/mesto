@@ -5,11 +5,10 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithFormSubmit from '../components/PopupWithFormSubmit.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, nameInput, jobInput, openAddForm } from '../utils/constants.js'
-//import { handleCardClick } from '../utils/utils.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm, avatar } from '../utils/constants.js'
 import './index.css';
 import { Api } from '../components/Api.js'
-//import { ajaxPrefilter } from 'jquery'
+
 
 const cardsConfig = {
     placesWrap: '.elements',
@@ -40,7 +39,7 @@ Promise.all([
     api.getUserInfo(),
     api.getInitialCards()
 ]).then(([userInfo, cards]) => {
-    console.log(cards);
+    avatar.src = userInfo.avatar;
     myUserId = userInfo._id;
     profileInfo.setUserInfo(userInfo);
     cardsSection.renderItems(cards);
@@ -51,7 +50,11 @@ const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
         profileInfo.setUserInfo(profileData);
-        api.updateUserInfo(profileData);
+        api.updateUserInfo(profileData)
+        .catch(err => console.log('Ошибка', err)
+        ).finally(() => {
+            editProfilePopup.renderLoading(false);
+        });
         editProfilePopup.close();
     })
 
@@ -74,17 +77,19 @@ function createCard(item) {
         {
         onLikeClick: (item, isLiked) => {
             if (!isLiked) {
-                console.log(card);
                 api.setLike(item).then((res) => {
                     card.setAmountLikes(res);
                     card.setLike();
                 })
+                .catch(err => console.log('Ошибка', err)
+                );
             } else {
-                console.log(card);
                 api.deleteLike(item).then((res) => {
                     card.setAmountLikes(res);
                     card.setLike();
                 })
+                .catch(err => console.log('Ошибка', err)
+                );
             }
         },
         handleCardClick,
@@ -105,7 +110,7 @@ function handleCardDelete(item, cardElement) {
             cardElement.remove();
             cardDeletePopup.close();
         }).catch((err) => {
-            console.log(err);
+            console.log('Ошибка', err);
         })
     })
 }
@@ -114,11 +119,12 @@ const addCardPopup = new PopupWithForm (
     '.popup_form_place', 
     (cardData) => {
         api.loadNewCard(cardData).then((item) => {
-            console.log(item);
             cardsSection.addItem(createCard(item));
             addCardPopup.close();
         }).catch(err => console.log('Ошибка', err)
-        );
+        ).finally(() => {
+            addCardPopup.renderLoading(false);
+        });
     })
 
 openAddForm.addEventListener('click', function() {
@@ -126,22 +132,24 @@ openAddForm.addEventListener('click', function() {
     placesFormValidator.clearErrorElement();
 });
 
+const editAvaProfilePopup = new PopupWithForm (
+    '.popup_form_edit-ava',
+    (input) => {
+        api.changeAva(input).then((item) => {
+            avatar.src = item.avatar;
+        })
+        .catch(err => console.log('Ошибка', err)
+        ).finally(() => {
+            editAvaProfilePopup.renderLoading(false);
+        });
+        editAvaProfilePopup.close();
+    }
+)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+openAvaEditForm.addEventListener('click', function() {
+    editAvaProfilePopup.open();
+    avaFormValidator.clearErrorElement();
+})
 
 
 /// Данные для валидации форм ///
@@ -169,3 +177,13 @@ const placesFormValidator = new FormValidator(
 );
 
 placesFormValidator.enableValidation();
+
+// валидация поля формы по смене аватара //
+const avaFormValidator = new FormValidator(
+    config,
+    document.querySelector('form[name="edit-ava"]')
+);
+
+avaFormValidator.enableValidation();
+
+
