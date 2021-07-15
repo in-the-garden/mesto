@@ -66,7 +66,6 @@ openEditFrom.addEventListener('click', function() {
     profileFormValidator.clearErrorElement();
 });  
 
-/// Создание экземпляров классов для pop-up ///
 const cardDeletePopup = new PopupWithFormSubmit('.popup_form_card-dlt');
 const popupImage = new PopupWithImage('.popup_form_images');
 
@@ -132,23 +131,23 @@ openAddForm.addEventListener('click', function() {
     placesFormValidator.clearErrorElement();
 });
 
-const editAvaProfilePopup = new PopupWithForm (
+const editAvatarProfilePopup = new PopupWithForm (
     '.popup_form_edit-ava',
     (input) => {
-        api.changeAva(input).then((item) => {
+        api.changeAvatar(input).then((item) => {
             avatar.src = item.avatar;
         })
         .catch(err => console.log('Ошибка', err)
         ).finally(() => {
-            editAvaProfilePopup.renderLoading(false);
+            editAvatarProfilePopup.renderLoading(false);
         });
-        editAvaProfilePopup.close();
+        editAvatarProfilePopup.close();
     }
 )
 
 openAvaEditForm.addEventListener('click', function() {
-    editAvaProfilePopup.open();
-    avaFormValidator.clearErrorElement();
+    editAvatarProfilePopup.open();
+    avatarFormValidator.clearErrorElement();
 })
 
 
@@ -179,11 +178,11 @@ const placesFormValidator = new FormValidator(
 placesFormValidator.enableValidation();
 
 // валидация поля формы по смене аватара //
-const avaFormValidator = new FormValidator(
+const avatarFormValidator = new FormValidator(
     config,
     document.querySelector('form[name="edit-ava"]')
 );
 
-avaFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 

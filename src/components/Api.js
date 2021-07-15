@@ -97,7 +97,7 @@ export class Api {
         })
     }
 
-    changeAva(input) {
+    changeAvatar(input) {
         return fetch(`${this.baseUrl}/users/me/avatar`,{
             method: 'PATCH',
             headers: this.headers,
