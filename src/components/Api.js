@@ -4,28 +4,25 @@ export class Api {
         this.headers = options.headers;
     }
 
+    _handleResponse(res) {
+        if (!res.ok) {
+            return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+    }
+
     getUserInfo() {
         return fetch(`${this.baseUrl}/users/me`, {
             headers: this.headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
     
     getInitialCards() {
         return fetch(`${this.baseUrl}/cards`, {
             headers: this.headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 
     updateUserInfo(data) {
@@ -50,12 +47,7 @@ export class Api {
                 link: cardElement.link
             })
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 
     deleteCard(cardElement) {
@@ -63,12 +55,7 @@ export class Api {
             method: 'DELETE',
             headers: this.headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 
     setLike(cardElement) {
@@ -76,12 +63,7 @@ export class Api {
             method: 'PUT',
             headers: this.headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 
     deleteLike(cardElement) {
@@ -89,12 +71,7 @@ export class Api {
             method: 'DELETE',
             headers: this.headers
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 
     changeAvatar(input) {
@@ -105,11 +82,6 @@ export class Api {
                 avatar: input.link
             })
         })
-        .then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(this._handleResponse)
     }
 }
