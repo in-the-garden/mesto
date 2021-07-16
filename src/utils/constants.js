@@ -1,7 +1,6 @@
 /// Объявление переменных для форм ///
 export const openEditFrom = document.querySelector('.profile__edit-button');
-export const openAvaEditForm = document.querySelector('.profile__edit-avatar-button');
-export const avatar = document.querySelector('.profile__avatar');
+export const openAvatarEditForm = document.querySelector('.profile__edit-avatar-button');
 
 export const nameInput = document.querySelector('.popup__input_info_name');
 export const jobInput = document.querySelector('.popup__input_info_job');

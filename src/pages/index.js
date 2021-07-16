@@ -5,7 +5,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithFormSubmit from '../components/PopupWithFormSubmit.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm, avatar } from '../utils/constants.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, openAvatarEditForm } from '../utils/constants.js'
 import './index.css';
 import { Api } from '../components/Api.js'
 
@@ -33,15 +33,15 @@ const cardsSection = new Section ({
     cardsConfig.placesWrap
 );
 
-const profileInfo = new UserInfo({name:'.profile__title', about:'.profile__subtitle'});
+const profileInfo = new UserInfo({name:'.profile__title', about:'.profile__subtitle', avatar:'.profile__avatar'});
 
 Promise.all([
     api.getUserInfo(),
     api.getInitialCards()
 ]).then(([userInfo, cards]) => {
-    avatar.src = userInfo.avatar;
     myUserId = userInfo._id;
     profileInfo.setUserInfo(userInfo);
+    profileInfo.setAvatar(userInfo);
     cardsSection.renderItems(cards);
 }).catch(err => console.log('Ошибка', err)
 );
@@ -50,12 +50,13 @@ const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
         profileInfo.setUserInfo(profileData);
-        api.updateUserInfo(profileData)
+        api.updateUserInfo(profileData).then((res) => {
+            editProfilePopup.close();
+        })
         .catch(err => console.log('Ошибка', err)
         ).finally(() => {
             editProfilePopup.renderLoading(false);
         });
-        editProfilePopup.close();
     })
 
 openEditFrom.addEventListener('click', function() {
@@ -66,7 +67,6 @@ openEditFrom.addEventListener('click', function() {
     profileFormValidator.clearErrorElement();
 });  
 
-/// Создание экземпляров классов для pop-up ///
 const cardDeletePopup = new PopupWithFormSubmit('.popup_form_card-dlt');
 const popupImage = new PopupWithImage('.popup_form_images');
 
@@ -132,23 +132,23 @@ openAddForm.addEventListener('click', function() {
     placesFormValidator.clearErrorElement();
 });
 
-const editAvaProfilePopup = new PopupWithForm (
+const editAvatarProfilePopup = new PopupWithForm (
     '.popup_form_edit-ava',
     (input) => {
-        api.changeAva(input).then((item) => {
-            avatar.src = item.avatar;
+        api.changeAvatar(input).then((item) => {
+            profileInfo.setAvatar(item);
+            editAvatarProfilePopup.close();
         })
         .catch(err => console.log('Ошибка', err)
         ).finally(() => {
-            editAvaProfilePopup.renderLoading(false);
+            editAvatarProfilePopup.renderLoading(false);
         });
-        editAvaProfilePopup.close();
     }
 )
 
-openAvaEditForm.addEventListener('click', function() {
-    editAvaProfilePopup.open();
-    avaFormValidator.clearErrorElement();
+openAvatarEditForm.addEventListener('click', function() {
+    editAvatarProfilePopup.open();
+    avatarFormValidator.clearErrorElement();
 })
 
 
@@ -179,11 +179,11 @@ const placesFormValidator = new FormValidator(
 placesFormValidator.enableValidation();
 
 // валидация поля формы по смене аватара //
-const avaFormValidator = new FormValidator(
+const avatarFormValidator = new FormValidator(
     config,
     document.querySelector('form[name="edit-ava"]')
 );
 
-avaFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 

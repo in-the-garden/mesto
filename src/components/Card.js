@@ -38,12 +38,7 @@ class Card {
     }
 
     _getIsLiked() {
-        if (this._likes.some(like => like._id === this._currentUserId)) {
-            return true;
-        } else {
-            return false;
-            
-        }
+        return (this._likes.some(like => like._id === this._currentUserId));
     }
 
     generateCard() {
