@@ -5,7 +5,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithFormSubmit from '../components/PopupWithFormSubmit.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm } from '../utils/constants.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, openAvatarEditForm } from '../utils/constants.js'
 import './index.css';
 import { Api } from '../components/Api.js'
 
@@ -146,7 +146,7 @@ const editAvatarProfilePopup = new PopupWithForm (
     }
 )
 
-openAvaEditForm.addEventListener('click', function() {
+openAvatarEditForm.addEventListener('click', function() {
     editAvatarProfilePopup.open();
     avatarFormValidator.clearErrorElement();
 })
