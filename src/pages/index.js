@@ -5,7 +5,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithFormSubmit from '../components/PopupWithFormSubmit.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm, avatar } from '../utils/constants.js'
+import { openEditFrom, nameInput, jobInput, openAddForm, openAvaEditForm } from '../utils/constants.js'
 import './index.css';
 import { Api } from '../components/Api.js'
 
@@ -33,15 +33,15 @@ const cardsSection = new Section ({
     cardsConfig.placesWrap
 );
 
-const profileInfo = new UserInfo({name:'.profile__title', about:'.profile__subtitle'});
+const profileInfo = new UserInfo({name:'.profile__title', about:'.profile__subtitle', avatar:'.profile__avatar'});
 
 Promise.all([
     api.getUserInfo(),
     api.getInitialCards()
 ]).then(([userInfo, cards]) => {
-    avatar.src = userInfo.avatar;
     myUserId = userInfo._id;
     profileInfo.setUserInfo(userInfo);
+    profileInfo.setAvatar(userInfo);
     cardsSection.renderItems(cards);
 }).catch(err => console.log('Ошибка', err)
 );
@@ -50,12 +50,13 @@ const editProfilePopup = new PopupWithForm (
     '.popup_form_profile', 
     (profileData) => {
         profileInfo.setUserInfo(profileData);
-        api.updateUserInfo(profileData)
+        api.updateUserInfo(profileData).then((res) => {
+            editProfilePopup.close();
+        })
         .catch(err => console.log('Ошибка', err)
         ).finally(() => {
             editProfilePopup.renderLoading(false);
         });
-        editProfilePopup.close();
     })
 
 openEditFrom.addEventListener('click', function() {
@@ -135,13 +136,13 @@ const editAvatarProfilePopup = new PopupWithForm (
     '.popup_form_edit-ava',
     (input) => {
         api.changeAvatar(input).then((item) => {
-            avatar.src = item.avatar;
+            profileInfo.setAvatar(item);
+            editAvatarProfilePopup.close();
         })
         .catch(err => console.log('Ошибка', err)
         ).finally(() => {
             editAvatarProfilePopup.renderLoading(false);
         });
-        editAvatarProfilePopup.close();
     }
 )
 
